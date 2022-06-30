@@ -5,8 +5,8 @@ export default function handler(req: NextRequest) {
     req.headers.set("authorization", "backend-auth")
   }
   req.headers.delete("connection")
-  const path = req.nextUrl.pathname.replace("/api", "/api/backend")
-  return fetch(`http://localhost:3000/${path}`, {
+  req.nextUrl.pathname = req.nextUrl.pathname.replace("/api", "/api/backend")
+  return fetch(req.nextUrl, {
     headers: req.headers,
     method: req.method,
     body: req.body,
